@@ -1,9 +1,12 @@
 import { PostCoverImage } from "../PostCoverImage";
 import { PostSummary } from "../PostSummary";
+import { findAllPublicPosts } from "@/lib/post/queries";
 
-export function FeaturedPost() {
-  const slug = "exemplo";
-  const postLink = `/post/${slug}`;
+export async function FeaturedPost() {
+  const posts = await findAllPublicPosts();
+  const featuredPost = posts[0];
+
+  const postLink = `/post/${featuredPost.slug}`;
 
   return (
     <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
@@ -14,16 +17,16 @@ export function FeaturedPost() {
         imageProps={{
           width: 1200,
           height: 720,
-          src: "/images/bryen_9.png",
-          alt: "alt da imagem",
+          src: featuredPost.coverImageUrl,
+          alt: featuredPost.title,
           priority: true,
         }}
       />
 
       <PostSummary
-        title="Dicas para manter a saúde mental em dia"
-        excerpt="Em vez de configurar tudo manualmente, basta criar um arquivo com o nome certo e o Next.js entende que aquilo representa uma página."
-        createdAt="2025-04-07T00:24:38.616Z"
+        title={featuredPost.title}
+        excerpt={featuredPost.excerpt}
+        createdAt={featuredPost.createdAt}
         postHeading="h1"
         postLink={postLink}
       />
