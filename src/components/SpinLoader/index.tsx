@@ -5,7 +5,7 @@ type SpinLoaderProps = {
 };
 
 export function SpinLoader({ className = "" }: SpinLoaderProps) {
-  const classes = clsx("flex", "items-center", "justify-center", className);
+  const classes = clsx("flex", "items-center", "justify-center", "p-24", className);
 
   return (
     <div className={classes}>
