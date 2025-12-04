@@ -12,3 +12,4 @@ export const drizzleDb = drizzle(sqliteDatabase, {
   },
   logger: false,
 });
+
