@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="text-center pb-16">
       <p>
         <span>
-          Copyright &copy; {new Date().getFullYear()} -{" "}
+          Copyright &copy; 2025 -{" "}
           <Link href="/">The Blog</Link>
         </span>
       </p>

@@ -41,15 +41,3 @@ export class DrizzlePostRepository implements PostRepository {
     return post;
   }
 }
-
-// (async () => {
-//   const repo = new DrizzlePostRepository();
-
-//   const post = await repo.findById("6b204dab-2312-4525-820a-a0463560835f");
-
-//     // const post = await repo.findAll();
-
-//   console.log(post);
-
-//   // post.forEach((post) => console.log(post.id, post.published));
-// })();

@@ -12,6 +12,7 @@ export async function generateMetadata({
   params,
 }: PostSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
+
   const post = await findPostBySlug(slug);
 
   return {
