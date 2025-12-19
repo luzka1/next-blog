@@ -11,7 +11,9 @@ type PostSlugPageProps = {
 export async function generateMetadata({
   params,
 }: PostSlugPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const slugParam = params.then((p) => ({ slug: p.slug }));
+
+  const { slug } = await slugParam;
 
   const post = await findPostBySlug(slug);
 
@@ -22,11 +24,11 @@ export async function generateMetadata({
 }
 
 export default async function PostSlugPage({ params }: PostSlugPageProps) {
-  const { slug } = await params;
+  const slug = params.then((p) => ({ slug: p.slug }));
 
   return (
     <Suspense fallback={<SpinLoader />}>
-      <SinglePost slug={slug} />
+      <SinglePost slugParam={slug} />
     </Suspense>
   );
 }

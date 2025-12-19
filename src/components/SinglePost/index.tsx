@@ -5,10 +5,12 @@ import { PostDate } from "../PostDate";
 import { SafeMarkDown } from "../SafeMarkDown";
 
 type SinglePostProps = {
-  slug: string;
+  slugParam: Promise<{slug: string}>;
 };
 
-export async function SinglePost({ slug }: SinglePostProps) {
+export async function SinglePost({ slugParam }: SinglePostProps) {
+  const slug = (await slugParam).slug;
+
   const post = await findPostBySlug(slug);
 
   return (

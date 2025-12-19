@@ -1,8 +1,10 @@
+import { eq } from "drizzle-orm";
 import { drizzleDb } from ".";
 import { postsTable } from "./schemas";
 
 (async () => {
-  const posts = await drizzleDb.select().from(postsTable);
-
-  posts.forEach((post) => console.log(post.id));
+  await drizzleDb
+    .update(postsTable)
+    .set({ title: "Algumas dicas para manter a saúde mental em dia" })
+    .where(eq(postsTable.slug, "dicas-para-manter-a-saude-mental-em-dia"));
 })();
