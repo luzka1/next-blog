@@ -1,15 +1,15 @@
-import { findPostBySlug } from "@/lib/post/queries";
+import { findPostBySlug } from "@/lib/post/public";
 import Image from "next/image";
 import { PostHeading } from "../PostHeading";
 import { PostDate } from "../PostDate";
 import { SafeMarkDown } from "../SafeMarkDown";
 
 type SinglePostProps = {
-  slugParam: Promise<{slug: string}>;
+  slugParam: Promise<{ slug: string }>;
 };
 
 export async function SinglePost({ slugParam }: SinglePostProps) {
-  const slug = (await slugParam).slug;
+  const { slug } = await slugParam;
 
   const post = await findPostBySlug(slug);
 

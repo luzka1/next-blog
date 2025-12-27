@@ -1,6 +1,6 @@
 import { SinglePost } from "@/components/SinglePost";
 import { SpinLoader } from "@/components/SpinLoader";
-import { findPostBySlug } from "@/lib/post/queries";
+import { findPostBySlug } from "@/lib/post/public";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostSlugPage({ params }: PostSlugPageProps) {
+export default function PostSlugPage({ params }: PostSlugPageProps) {
   const slug = params.then((p) => ({ slug: p.slug }));
 
   return (

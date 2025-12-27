@@ -1,3 +1,18 @@
-export default function AdminPostPage() {
-  return <h1 className="text-5xl font-bold">AdminPostPage</h1>;
+import { PostsListAdmin } from "@/components/admin/PostsListAdmin";
+import { SpinLoader } from "@/components/SpinLoader";
+import { Metadata } from "next";
+import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Post Admin",
+};
+
+export default async function AdminPostPage() {
+  return (
+    <div className="flex flex-col">
+      <Suspense fallback={<SpinLoader />}>
+        <PostsListAdmin />
+      </Suspense>
+    </div>
+  );
 }

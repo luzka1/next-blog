@@ -1,11 +1,6 @@
 "use server";
-import { revalidateTag } from "next/cache";
-
-export async function revalidadeByTag({ tag }: { tag: string }) {
-  revalidateTag(tag, "max");
-}
+import { updateTag } from "next/cache";
 
 export async function revalidateAction() {
-  console.log("clicou ni mim")
-  revalidateTag("public-posts", "max");
+  updateTag("public-posts");
 }

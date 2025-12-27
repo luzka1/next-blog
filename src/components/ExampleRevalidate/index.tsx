@@ -3,5 +3,9 @@
 import { revalidateAction } from "@/actions/revalidate";
 
 export function ExampleRevalidate() {
-  return <button onClick={() => revalidateAction()}>REVALIDATE</button>;
+  return (
+    <div>
+      <button onClick={() => revalidateAction()}>REVALIDATE HOME</button>
+    </div>
+  );
 }
