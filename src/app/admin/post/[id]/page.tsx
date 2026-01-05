@@ -1,4 +1,4 @@
-import { AdminSinglePost } from "@/components/AdminSinglePost";
+import { AdminSinglePost } from "@/components/admin/AdminSinglePost";
 import { SpinLoader } from "@/components/SpinLoader";
 import { Suspense } from "react";
 
