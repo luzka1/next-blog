@@ -1,9 +1,24 @@
+import { makePublicPost } from "@/dto/post/dto";
+import { findPostById } from "@/lib/post/admin";
+import { notFound } from "next/navigation";
+import { ManagePostForm } from "../ManagePostForm";
+
 type AdminSinglePostPageProps = {
   idParam: Promise<{ id: string }>;
 };
 
 export async function AdminSinglePost({ idParam }: AdminSinglePostPageProps) {
   const { id } = await idParam;
+  const post = await findPostById(id);
 
-  return <h1>AdminSinglePost: {id}</h1>;
+  if (!post) return notFound();
+
+  const publicPost = makePublicPost(post);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <h1 className="text-xl font-extrabold">Editar post</h1>
+      <ManagePostForm publicPost={publicPost} />
+    </div>
+  );
 }
