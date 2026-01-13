@@ -28,8 +28,6 @@ export async function uploadImageAction(
     return makeResult({ error: "Arquivo inválido" });
   }
 
-  console.log(file);
-
   if (!file.type.startsWith("image/")) {
     return makeResult({ error: "Imagem inválida2" });
   }

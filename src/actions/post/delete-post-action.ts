@@ -29,10 +29,9 @@ export async function deletePostAction(id: string) {
   await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
 
   // TODO: updateTag
-  updateTag("public-posts");
+  updateTag("posts");
   updateTag(`post-${post.slug}`);
   updateTag("single-post");
-  updateTag("admin-posts");
 
   return {
     error: "",

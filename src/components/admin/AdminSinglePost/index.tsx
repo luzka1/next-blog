@@ -1,4 +1,4 @@
-import { makePublicPost } from "@/dto/post/dto";
+import { makePublicPostFromDb } from "@/dto/post/dto";
 import { findPostById } from "@/lib/post/admin";
 import { notFound } from "next/navigation";
 import { ManagePostForm } from "../ManagePostForm";
@@ -13,7 +13,7 @@ export async function AdminSinglePost({ idParam }: AdminSinglePostPageProps) {
 
   if (!post) return notFound();
 
-  const publicPost = makePublicPost(post);
+  const publicPost = makePublicPostFromDb(post);
 
   return (
     <div className="flex flex-col gap-6">

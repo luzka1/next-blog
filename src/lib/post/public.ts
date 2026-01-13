@@ -6,7 +6,7 @@ import { cache } from "react";
 export const findAllPublicPosts = cache(async () => {
   "use cache";
   cacheLife("minutes");
-  cacheTag("public-posts");
+  cacheTag("posts");
 
   return await postRepository.findAllPublic();
 });

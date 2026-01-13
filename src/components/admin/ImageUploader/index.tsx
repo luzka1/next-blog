@@ -1,6 +1,6 @@
 "use client";
 
-import { uploadImageAction } from "@/actions/upload-image-action";
+import { uploadImageAction } from "@/actions/post/upload-image-action";
 import { showMessage } from "@/adapters/showMessage";
 import { Button } from "@/components/Button";
 import { IMAGE_UPLOADER_MAX_SIZE } from "@/lib/constants";

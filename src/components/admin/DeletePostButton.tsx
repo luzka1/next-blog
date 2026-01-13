@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Trash2Icon } from "lucide-react";
 import { useState, useTransition } from "react";
 import { Dialog } from "../Dialog";
-import { deletePostAction } from "@/actions/delete-post-action";
+import { deletePostAction } from "@/actions/post/delete-post-action";
 import { showMessage } from "@/adapters/showMessage";
 
 type DeletePostButtonProps = {

@@ -13,7 +13,7 @@ export const findPostById = cache(async (slug: string) => {
 export const findAllPosts = cache(async () => {
   "use cache";
   cacheLife("minutes");
-  cacheTag("admin-posts");
+  cacheTag("posts");
 
   return await postRepository.findAll();
 });
