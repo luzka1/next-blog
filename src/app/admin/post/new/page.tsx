@@ -8,6 +8,6 @@ export const metadata:Metadata = {
 export default function AdmingNewPostPage() {
   return <div className="flex flex-col gap-6">
     <h1 className="text-xl font-extrabold">Criar post</h1>
-    <ManagePostForm />
+    <ManagePostForm mode="create" />
   </div>;
 }

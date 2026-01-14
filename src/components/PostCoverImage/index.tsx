@@ -9,7 +9,6 @@ type PostCoverImageProps = {
 
 export function PostCoverImage({
   imageProps,
-
   linkProps,
 }: PostCoverImageProps) {
   return (

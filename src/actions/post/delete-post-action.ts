@@ -3,13 +3,11 @@
 import { drizzleDb } from "@/db/drizzle";
 import { postsTable } from "@/db/drizzle/schemas";
 import { postRepository } from "@/repositories/post";
-import { asyncDelay } from "@/utils/async-delay";
 import { eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
 
 export async function deletePostAction(id: string) {
   //TODO Checar se o usuário está logado.
-  await asyncDelay(2000);
 
   if (!id || typeof id !== "string") {
     return {
@@ -17,18 +15,17 @@ export async function deletePostAction(id: string) {
     };
   }
 
-  const post = await postRepository.findById(id).catch(() => undefined);
+  let post;
 
-  if (!post) {
-    return {
-      error: "Esse post não existe",
-    };
+  try {
+    post = await postRepository.delete(id);
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return { error: e.message };
+    }
+    return { error: "Erro desconhecido!" };
   }
 
-  // TODO: mover o método para o repositório
-  await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
-
-  // TODO: updateTag
   updateTag("posts");
   updateTag(`post-${post.slug}`);
   updateTag("single-post");

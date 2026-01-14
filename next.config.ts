@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
         search: '',
       }
     ],
+    dangerouslyAllowLocalIP: true,
   }
 };
 

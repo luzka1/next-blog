@@ -7,7 +7,11 @@ import { IMAGE_UPLOADER_MAX_SIZE } from "@/lib/constants";
 import { ImageUpIcon } from "lucide-react";
 import { useRef, useState, useTransition } from "react";
 
-export function ImageUploader() {
+type ImageUploaderProps = {
+  disabled?: boolean
+}
+
+export function ImageUploader({disabled}: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, startTransition] = useTransition();
   const [imgUrl, setImgUrl] = useState("");
@@ -69,7 +73,7 @@ export function ImageUploader() {
   return (
     <div className="flex flex-col gap-4 py-4">
       <Button
-        disabled={isUploading}
+        disabled={isUploading || disabled}
         onClick={handleChooseFile}
         type="button"
         className="self-start"
@@ -94,7 +98,7 @@ export function ImageUploader() {
         name="file"
         type="file"
         accept="image/*"
-        disabled={isUploading}
+        disabled={isUploading || disabled}
       />
     </div>
   );
