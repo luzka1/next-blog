@@ -1,9 +1,6 @@
 "use server";
 
-import { drizzleDb } from "@/db/drizzle";
-import { postsTable } from "@/db/drizzle/schemas";
 import { postRepository } from "@/repositories/post";
-import { eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
 
 export async function deletePostAction(id: string) {

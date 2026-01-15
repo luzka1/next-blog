@@ -16,7 +16,7 @@ import { v4 as uuidV4 } from "uuid";
 type CreatePostActionState = {
   formState: PublicPostDTO;
   errors: string[];
-  success?: true;
+  success?: string;
 };
 
 export async function createPostAction(
@@ -77,5 +77,5 @@ export async function createPostAction(
 
   updateTag("posts");
 
-  redirect(`/admin/post/${newPost.id}`);
+  redirect(`/admin/post/${newPost.id}?created=1`);
 }

@@ -35,8 +35,6 @@ export async function uploadImageAction(
   const imageExtension = extname(file.name);
   const uniqueImageName = `${Date.now()}${imageExtension}`;
 
-  console.log(uniqueImageName);
-
   const uploadDir = IMAGE_UPLOADER_DIR;
   const uploadFullPath = resolve(process.cwd(), "public", uploadDir);
   await mkdir(uploadFullPath, { recursive: true });

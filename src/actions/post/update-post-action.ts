@@ -9,12 +9,13 @@ import { PostUpdateSchema } from "@/lib/post/validations";
 import { postRepository } from "@/repositories/post";
 import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
+import { makeRandomString } from "@/utils/make-random-string";
 import { updateTag } from "next/cache";
 
 type UpdatePostActionState = {
   formState: PublicPostDTO;
   errors: string[];
-  success?: true;
+  success?: string;
 };
 
 export async function updatePostAction(
@@ -32,7 +33,7 @@ export async function updatePostAction(
   }: {
     formState?: PublicPostDTO;
     errors?: string[];
-    success?: true;
+    success?: string;
   }) => ({
     formState,
     errors,
@@ -47,13 +48,9 @@ export async function updatePostAction(
 
   const id = formData.get("id")?.toString() || "";
 
-  console.log(id, typeof id);
-
   if (!id || typeof id != "string") {
     return makeResult({ errors: ["ID inválido!"] });
   }
-
-  console.log("erro de id aqui em baixo",id);
 
   const formDataToObject = Object.fromEntries(formData.entries());
   const zodParsedObject = PostUpdateSchema.safeParse(formDataToObject);
@@ -93,5 +90,5 @@ export async function updatePostAction(
   updateTag("posts");
   updateTag(`post-${post.slug}`);
 
-  return makeResult({ formState: makePublicPostFromDb(post), success: true });
+  return makeResult({ formState: makePublicPostFromDb(post), success: makeRandomString() });
 }
