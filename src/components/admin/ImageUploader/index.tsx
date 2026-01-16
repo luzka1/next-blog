@@ -3,15 +3,14 @@
 import { uploadImageAction } from "@/actions/post/upload-image-action";
 import { showMessage } from "@/adapters/showMessage";
 import { Button } from "@/components/Button";
-import { IMAGE_UPLOADER_MAX_SIZE } from "@/lib/constants";
 import { ImageUpIcon } from "lucide-react";
 import { useRef, useState, useTransition } from "react";
 
 type ImageUploaderProps = {
-  disabled?: boolean
-}
+  disabled?: boolean;
+};
 
-export function ImageUploader({disabled}: ImageUploaderProps) {
+export function ImageUploader({ disabled }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, startTransition] = useTransition();
   const [imgUrl, setImgUrl] = useState("");
@@ -39,8 +38,11 @@ export function ImageUploader({disabled}: ImageUploaderProps) {
       return;
     }
 
-    if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
-      const readableMaxSize = IMAGE_UPLOADER_MAX_SIZE / 1024;
+    const uploadMaxSize =
+      Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 921600;
+
+    if (file.size > uploadMaxSize) {
+      const readableMaxSize = (uploadMaxSize / 1024).toFixed(2);
 
       showMessage.error(
         `Imagem muito grande. Tamanho máximo: ${readableMaxSize}KB`

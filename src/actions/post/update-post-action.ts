@@ -7,7 +7,6 @@ import {
 } from "@/dto/post/dto";
 import { PostUpdateSchema } from "@/lib/post/validations";
 import { postRepository } from "@/repositories/post";
-import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
 import { makeRandomString } from "@/utils/make-random-string";
 import { updateTag } from "next/cache";
@@ -23,8 +22,6 @@ export async function updatePostAction(
   formData: FormData
 ): Promise<UpdatePostActionState> {
   // TODO: verificar se o usuário está logado
-
-  await asyncDelay(2000);
 
   const makeResult = ({
     formState = makePartialPublicPost(prevState.formState),

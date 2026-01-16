@@ -2,13 +2,14 @@ import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
 import { drizzleDb } from "@/db/drizzle";
 import { asyncDelay } from "@/utils/async-delay";
-import { SIMULATE_WAIT_IN_MS } from "@/lib/constants";
 import { postsTable } from "@/db/drizzle/schemas";
 import { eq } from "drizzle-orm";
 
+const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+
 export class DrizzlePostRepository implements PostRepository {
   async findAllPublic(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS);
+    await asyncDelay(simulateWaitMs);
     const posts = await drizzleDb.query.posts.findMany({
       orderBy: (posts, { desc }) => desc(posts.createdAt),
       where: (posts, { eq }) => eq(posts.published, true),
@@ -18,7 +19,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findBySlugPublic(slug: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS);
+    await asyncDelay(simulateWaitMs);
     const post = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq, and }) =>
         and(eq(posts.published, true), eq(posts.slug, slug)),
@@ -30,7 +31,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findAll(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS);
+    await asyncDelay(simulateWaitMs);
     const posts = await drizzleDb.query.posts.findMany({
       orderBy: (posts, { desc }) => desc(posts.createdAt),
     });
@@ -39,7 +40,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findById(id: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS);
+    await asyncDelay(simulateWaitMs);
     const post = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq }) => eq(posts.id, id),
     });
@@ -80,7 +81,6 @@ export class DrizzlePostRepository implements PostRepository {
     id: string,
     newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">
   ): Promise<PostModel> {
-
     const oldPost = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq }) => eq(posts.id, id),
     });

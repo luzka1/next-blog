@@ -1,12 +1,9 @@
 "use server";
 
-import { drizzleDb } from "@/db/drizzle";
-import { postsTable } from "@/db/drizzle/schemas";
 import { makePartialPublicPost, PublicPostDTO } from "@/dto/post/dto";
 import { PostCreateSchema } from "@/lib/post/validations";
 import { PostModel } from "@/models/post/post-model";
 import { postRepository } from "@/repositories/post";
-import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messages";
 import { makeSlugFromText } from "@/utils/make-slug-from-text";
 import { updateTag } from "next/cache";
@@ -24,8 +21,6 @@ export async function createPostAction(
   formData: FormData
 ): Promise<CreatePostActionState> {
   // TODO: verificar se o usuário está logado
-
-  await asyncDelay(2000);
 
   const makeResult = ({
     formState = makePartialPublicPost(prevState.formState),

@@ -53,7 +53,7 @@ export function Dialog({
         <h3 id="dialog-title" className="text-xl font-bold">
           {title}
         </h3>
-        <div id="dialog-description">{content}</div>
+        <div id="dialog-description" className="overflow-auto">{content}</div>
         <div className="flex items-center justify-around">
           <Button
             autoFocus

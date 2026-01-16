@@ -1,7 +1,5 @@
 "use server";
 
-import { IMAGE_SERVER_URL, IMAGE_UPLOADER_DIR } from "@/lib/constants";
-import { asyncDelay } from "@/utils/async-delay";
 import { mkdir, writeFile } from "fs/promises";
 import { extname, resolve } from "path";
 
@@ -14,12 +12,10 @@ export async function uploadImageAction(
   formData: FormData
 ): Promise<UploadImageAction> {
 
-  await asyncDelay(1000)
-
   const makeResult = ({ url = "", error = "" }) => ({ url, error });
 
   if (!(formData instanceof FormData)) {
-    return makeResult({ error: "Imagem inválida1" });
+    return makeResult({ error: "Imagem inválida" });
   }
 
   const file = formData.get("file");
@@ -29,13 +25,13 @@ export async function uploadImageAction(
   }
 
   if (!file.type.startsWith("image/")) {
-    return makeResult({ error: "Imagem inválida2" });
+    return makeResult({ error: "Imagem inválida" });
   }
 
   const imageExtension = extname(file.name);
   const uniqueImageName = `${Date.now()}${imageExtension}`;
 
-  const uploadDir = IMAGE_UPLOADER_DIR;
+  const uploadDir = process.env.IMAGE_UPLOADER_DIR || "uploads";
   const uploadFullPath = resolve(process.cwd(), "public", uploadDir);
   await mkdir(uploadFullPath, { recursive: true });
 
@@ -46,7 +42,9 @@ export async function uploadImageAction(
 
   await writeFile(fileFullPath, buffer);
 
-  const url = `${IMAGE_SERVER_URL}/${uniqueImageName}`;
+  const imgServerUrl = process.env.IMAGE_SERVER_URL || "http://localhost:3000/uploads";
+
+  const url = `${imgServerUrl}/${uniqueImageName}`;
 
   return makeResult({ url });
 }
