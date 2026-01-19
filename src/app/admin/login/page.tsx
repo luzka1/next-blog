@@ -1,3 +1,8 @@
-export default function AdminLoginPage(){
-    return <><h1 className="text-bold text-5xl">AdminLoginPage</h1></>
+import { LoginForm } from "@/components/admin/LoginForm";
+
+export default async function AdminLoginPage() {
+
+  return (
+    <LoginForm />
+  );
 }
