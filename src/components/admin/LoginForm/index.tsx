@@ -3,7 +3,8 @@ import { loginAction } from "@/actions/login/login-action";
 import { showMessage } from "@/adapters/showMessage";
 import { Button } from "@/components/Button";
 import { InputText } from "@/components/InputText";
-import { CircleXIcon, LogInIcon } from "lucide-react";
+import { SpinLoader } from "@/components/SpinLoader";
+import { CircleXIcon, LoaderCircleIcon, LogInIcon } from "lucide-react";
 import { useActionState, useEffect } from "react";
 
 export function LoginForm() {
@@ -29,6 +30,7 @@ export function LoginForm() {
           placeholder="Seu usuário"
           labelText="Usuário"
           disabled={isPending}
+          defaultValue={state.username}
         />
         <InputText
           type="password"
@@ -38,8 +40,19 @@ export function LoginForm() {
           disabled={isPending}
         />
         <Button disabled={isPending} type="submit" className="mt-4">
-          <LogInIcon />
-          Entrar
+          {!isPending && (
+            <>
+              <LogInIcon />
+              Entrar
+            </>
+          )}
+
+          {isPending && (
+            <div className="flex gap-2 items-center justify-center">
+              <LoaderCircleIcon className="animate-spin" />
+              Carregando...
+            </div>
+          )}
         </Button>
 
         {state.error && (

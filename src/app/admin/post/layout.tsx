@@ -1,8 +1,7 @@
-import { MenuAdmin } from "@/components/admin/MenuAdmin";
-import { SpinLoader } from "@/components/SpinLoader";
+import { MenuAdminLayout } from "@/components/admin/MenuAdminLayout";
 import { Suspense } from "react";
 
-export default function AdminPostLayout({
+export default async function AdminPostLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,9 +9,8 @@ export default function AdminPostLayout({
   return (
     <>
       <Suspense fallback={<>Carregando...</>}>
-        <MenuAdmin />
+        <MenuAdminLayout children={children} />
       </Suspense>
-      {children}
     </>
   );
 }
