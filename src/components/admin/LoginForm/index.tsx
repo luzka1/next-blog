@@ -3,7 +3,6 @@ import { loginAction } from "@/actions/login/login-action";
 import { showMessage } from "@/adapters/showMessage";
 import { Button } from "@/components/Button";
 import { InputText } from "@/components/InputText";
-import { SpinLoader } from "@/components/SpinLoader";
 import { CircleXIcon, LoaderCircleIcon, LogInIcon } from "lucide-react";
 import { useActionState, useEffect } from "react";
 
