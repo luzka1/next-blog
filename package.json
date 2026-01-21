@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migate": "drizzle-kit migrate",
+    "migrate": "drizzle-kit migrate",
     "seed": "tsx src/db/drizzle/seed.ts"
   },
   "dependencies": {
