@@ -68,10 +68,9 @@ export async function verifyLoginSession() {
 export async function requireLoginSessioOrRedirect() {
   const isAuthenticated = await verifyLoginSession();
 
-  if(!isAuthenticated){
+  if (!isAuthenticated) {
     redirect("/admin/login");
   }
-
 }
 
 export async function signJwt(jwtPayload: JwtPayload) {
@@ -90,7 +89,6 @@ export async function verifyJwt(jwt: string | undefined = "") {
 
     return payload;
   } catch {
-    console.log("Token inválido");
     return false;
   }
 }

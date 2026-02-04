@@ -20,7 +20,9 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
     });
   }
 
-  await asyncDelay(5000);
+  const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+
+  await asyncDelay(simulateWaitMs);
 
   if (!(formData instanceof FormData))
     return makeResult({ error: "Dados inválidos" });
