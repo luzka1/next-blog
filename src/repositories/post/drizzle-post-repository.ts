@@ -1,11 +1,13 @@
 import { PostModel } from "@/models/post/post-model";
 import { PostRepository } from "./post-repository";
-import { drizzleDb } from "@/db/drizzle";
+import { getDrizzleDb } from "@/db/drizzle";
 import { asyncDelay } from "@/utils/async-delay";
 import { postsTable } from "@/db/drizzle/schemas";
 import { eq } from "drizzle-orm";
 
 const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+
+const drizzleDb = getDrizzleDb();
 
 export class DrizzlePostRepository implements PostRepository {
   async findAllPublic(): Promise<PostModel[]> {
@@ -79,7 +81,7 @@ export class DrizzlePostRepository implements PostRepository {
 
   async update(
     id: string,
-    newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">
+    newPostData: Omit<PostModel, "id" | "slug" | "createdAt" | "updatedAt">,
   ): Promise<PostModel> {
     const oldPost = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq }) => eq(posts.id, id),
