@@ -3,15 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
     "migrate": "drizzle-kit migrate",
-    "seed": "tsx src/db/drizzle/seed.ts"
+    "seed": "tsx src/db/drizzle/seed.ts",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
+    "@opennextjs/cloudflare": "^1.17.1",
     "@tursodatabase/database": "^0.5.1",
     "@uiw/react-md-editor": "^4.0.11",
     "bcryptjs": "^3.0.3",
@@ -48,6 +53,7 @@
     "eslint-config-next": "16.0.3",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.74.0"
   }
 }
